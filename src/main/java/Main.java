@@ -5,7 +5,7 @@ public class Main {
   private static final Gson gson = new Gson();
 
   public static void main(String[] args) throws Exception {
-    // You can use print statements as follows for debugging, they'll be visible when running tests.
+
     System.err.println("Logs from your program will appear here!");
     
     String command = args[0];
@@ -14,19 +14,21 @@ public class Main {
         Object decoded;
         try {
           decoded = decodeBencode(bencodedValue);
-        } catch(RuntimeException e) {
+        }
+        catch(RuntimeException e) {
           System.out.println(e.getMessage());
           return;
         }
         System.out.println(gson.toJson(decoded));
 
-    } else {
-      System.out.println("Unknown command: " + command);
     }
+    else System.out.println("Unknown command: " + command);
+
 
   }
 
   static Object decodeBencode(String bencodedString) {
+
     if (Character.isDigit(bencodedString.charAt(0))) {
       int firstColonIndex = 0;
       for(int i = 0; i < bencodedString.length(); i++) { 
